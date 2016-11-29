@@ -45,6 +45,9 @@ Example
       {% call form.select(name, id=id, label=label, options=item.options, selected=value, error=error) %}
         {% if item.extra_info %}{{ form.info(item.extra_info) }}{% endif %}
       {% endcall %}
+    {% elif control == 'checkbox' %}
+      {% call form.checkbox(name, id=id, label=label, checked=value, error=error) %}
+      {% endcall %}
     {% elif control == 'html' %}
       <div class="control-group control-medium">
         <div class="controls">

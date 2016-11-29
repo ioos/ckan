@@ -52,6 +52,11 @@ class AdminController(base.BaseController):
             {'name': 'ckan.site_intro_text', 'control': 'markdown', 'label': _('Intro Text'), 'placeholder': _('Text on home page')},
             {'name': 'ckan.site_custom_css', 'control': 'textarea', 'label': _('Custom CSS'), 'placeholder': _('Customisable css inserted into the page header')},
             {'name': 'ckan.homepage_style', 'control': 'select', 'options': homepages, 'label': _('Homepage'), 'placeholder': ''},
+            {'name': 'smtp.server', 'control': 'input', 'label': _('SMTP Server'), 'placeholder': ''},
+            {'name': 'smtp.starttls', 'control': 'checkbox', 'label': _('TLS Enabled'), 'placeholder': ''},
+            {'name': 'smtp.user', 'control': 'input', 'label': _('SMTP User'), 'placeholder': ''},
+            {'name': 'smtp.password', 'control': 'input', 'label': _('SMTP Password'), 'placeholder': ''},
+            {'name': 'smtp.mail_from', 'control': 'input', 'label': _('Mail From'), 'placeholder': ''},
         ]
         return items
 
