@@ -646,7 +646,7 @@ def default_update_configuration_schema():
         'ckan.main_css': [unicode],
         'ckan.homepage_style': [is_positive_integer],
         'smtp.server': [unicode],
-        'smtp.starttls': [boolean_validator],
+        'smtp.starttls': [ignore_missing, boolean_validator],
         'smtp.user': [unicode],
         'smtp.password': [unicode],
         'smtp.mail_from': [unicode],

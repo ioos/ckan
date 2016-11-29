@@ -46,8 +46,13 @@ Example
         {% if item.extra_info %}{{ form.info(item.extra_info) }}{% endif %}
       {% endcall %}
     {% elif control == 'checkbox' %}
-      {% call form.checkbox(name, id=id, label=label, checked=value, error=error) %}
-      {% endcall %}
+      {% if value == 'True' %}
+        {% call form.checkbox(name, id=id, label=label, value='True', checked=true, error=error) %}
+        {% endcall %}
+      {% else %}
+        {% call form.checkbox(name, id=id, label=label, value='True', checked=false, error=error) %}
+        {% endcall %}
+      {% endif %}
     {% elif control == 'html' %}
       <div class="control-group control-medium">
         <div class="controls">
