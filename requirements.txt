@@ -4,6 +4,7 @@
 #
 #    pip-compile requirements.in
 #
+html5lib==0.9999999
 argparse==1.4.0           # via ofs
 babel==0.9.6
 beaker==1.7.0
