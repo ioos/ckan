@@ -135,7 +135,7 @@ def get_invite_body(user, group_dict=None, role=None):
 
 
 def get_reset_link(user):
-    return urljoin(config.get('site_url'),
+    return urljoin(config.get('ckan.site_url'),
                    h.url_for(controller='user',
                              action='perform_reset',
                              id=user.id,
