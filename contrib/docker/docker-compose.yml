@@ -4,17 +4,13 @@ version: "3"
 
 volumes:
   ckan_config:
-  ckan_home:
   ckan_storage:
   pg_data:
 
 services:
-  ckan:
+  ckan: &ckan_app
+    image: ioos/catalog-docker-base:ckan_upgrade_test
     container_name: ckan
-    build:
-      context: ../../
-      args:
-          - CKAN_SITE_URL=${CKAN_SITE_URL}
     links:
       - db
       - solr
@@ -33,17 +29,40 @@ services:
       - CKAN_MAX_UPLOAD_SIZE_MB=${CKAN_MAX_UPLOAD_SIZE_MB}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - DS_RO_PASS=${DATASTORE_READONLY_PASSWORD}
+      - GA_ENABLED=false
 
     volumes:
       - ckan_config:/etc/ckan
-      - ckan_home:/usr/lib/ckan
+      - /etc/sandbox_conf/test_config.cfg:/etc/pycsw/pycsw.cfg
       - ckan_storage:/var/lib/ckan
+
+  ckan_gather_harvester:
+     <<: *ckan_app
+     container_name: ckan_gather_harvester
+     command: ckan-paster --plugin=ckanext-harvest harvester gather_consumer -c /etc/ckan/production.ini
+     ports: []
+
+  ckan_fetch_harvester:
+     <<: *ckan_app
+     container_name: ckan_fetch_harvester
+     command: ckan-paster --plugin=ckanext-harvest harvester fetch_consumer -c /etc/ckan/production.ini
+     ports: []
 
   datapusher:
     container_name: datapusher
     image: clementmouchet/datapusher
     ports:
       - "8800:8800"
+
+  pycsw:
+    container_name: pycsw
+    image: geopython/pycsw
+    volumes:
+      - /etc/sandbox_conf/test_config.cfg:/etc/pycsw/pycsw.cfg
+    environment:
+      - PYCSW_CONFIG=/etc/pycsw/pycsw.cfg
+    ports:
+      - "8000:8000"
 
   db:
     container_name: db
