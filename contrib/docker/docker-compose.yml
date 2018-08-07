@@ -53,7 +53,7 @@ services:
 
   pycsw:
     container_name: pycsw
-    image: local_pycsw_test
+    image: geopython/pycsw
     volumes:
       - pycsw_config:/etc/pycsw
     environment:
