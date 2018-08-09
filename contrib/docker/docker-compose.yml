@@ -38,12 +38,16 @@ services:
      container_name: ckan_gather_harvester
      command: ckan-paster --plugin=ckanext-harvest harvester gather_consumer -c /etc/ckan/production.ini
      ports: []
+     depends_on:
+       - ckan
 
   ckan_fetch_harvester:
      <<: *ckan_app
      container_name: ckan_fetch_harvester
      command: ckan-paster --plugin=ckanext-harvest harvester fetch_consumer -c /etc/ckan/production.ini
      ports: []
+     depends_on:
+       - ckan
 
   datapusher:
     container_name: datapusher
@@ -60,6 +64,8 @@ services:
       - PYCSW_CONFIG=/etc/pycsw/pycsw.cfg
     ports:
       - "8000:8000"
+    depends_on:
+      - db
 
   db:
     container_name: db
