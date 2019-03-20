@@ -11,7 +11,7 @@ volumes:
 
 services:
   ckan: &ckan_app
-    image: ioos/catalog-docker-base:temporal-extent
+    image: ioos/catalog-docker-base:latest
     container_name: ckan
     ports:
       - "0.0.0.0:${CKAN_PORT}:5000"
