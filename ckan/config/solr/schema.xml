@@ -169,6 +169,9 @@ schema. In this case the version should be set to the next CKAN version number.
     <field name="minx" type="float" indexed="true" stored="true" />
     <field name="miny" type="float" indexed="true" stored="true" />
 
+    <!-- Field for data_provider for attribution -->
+    <field name="data_provider" type="string" indexed="true" stored="true" multiValued="true"/>
+
     <dynamicField name="*_date" type="date" indexed="true" stored="true" multiValued="false"/>
 
     <dynamicField name="extras_*" type="text" indexed="true" stored="true" multiValued="false"/>
