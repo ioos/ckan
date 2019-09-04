@@ -83,6 +83,23 @@ schema. In this case the version should be set to the next CKAN version number.
         </analyzer>
     </fieldType>
 
+    <!-- GCMD keywords hierarchically split along right angle brackets,
+         normalized for spacing and bracket separators -->
+    <fieldType name="gcmd_full" class="solr.TextField" positionIncrementGap="100">
+        <analyzer>
+          <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="\s*&gt;\s*"
+                  replacement="&gt;"/>
+          <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter=">" />
+          <filter class="solr.LowerCaseFilterFactory"/>
+          <filter class="solr.PatternReplaceFilterFactory" pattern="\s+"
+                  replacement=" "/>
+          <filter class="solr.PatternReplaceFilterFactory" pattern="\s*&gt;\s*"
+                  replacement=" &gt; "/>
+          <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="\s+"
+                  replacement=" "/>
+        </analyzer>
+    </fieldType>
+
     <!-- a field for full text.  Stores the whole field -->
     <fieldType name="textfull" class="solr.TextField" positionIncrementGap="100">
         <analyzer>
@@ -172,6 +189,7 @@ schema. In this case the version should be set to the next CKAN version number.
 
     <!-- Field for data_provider for attribution -->
     <field name="data_provider" type="string" indexed="true" stored="true" multiValued="true"/>
+    <field name="gcmd_keywords_full" type="gcmd_full" indexed="true" stored="true" multiValued="true"/>
 
     <dynamicField name="*_date" type="date" indexed="true" stored="true" multiValued="false"/>
 
