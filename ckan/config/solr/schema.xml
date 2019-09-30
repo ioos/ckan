@@ -86,10 +86,24 @@ schema. In this case the version should be set to the next CKAN version number.
     <!-- GCMD keywords hierarchically split along right angle brackets,
          normalized for spacing and bracket separators -->
     <fieldType name="gcmd_full" class="solr.TextField" positionIncrementGap="100">
-        <analyzer>
+        <analyzer type="index">
           <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="\s*&gt;\s*"
                   replacement="&gt;"/>
           <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter=">" />
+          <filter class="solr.LowerCaseFilterFactory"/>
+          <filter class="solr.PatternReplaceFilterFactory" pattern="\s+"
+                  replacement=" "/>
+          <filter class="solr.PatternReplaceFilterFactory" pattern="\s*&gt;\s*"
+                  replacement=" &gt; "/>
+          <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="\s+"
+                  replacement=" "/>
+        </analyzer>
+        <analyzer type="query">
+          <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="\s*&gt;\s*"
+                  replacement="&gt;"/>
+          <!-- needs KeywordTokenizerFactory for query so that the search terms
+               don't get split as well -->
+          <tokenizer class="solr.KeywordTokenizerFactory"/>
           <filter class="solr.LowerCaseFilterFactory"/>
           <filter class="solr.PatternReplaceFilterFactory" pattern="\s+"
                   replacement=" "/>
