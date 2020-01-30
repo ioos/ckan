@@ -101,8 +101,6 @@ schema. In this case the version should be set to the next CKAN version number.
         <analyzer type="query">
           <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="\s*&gt;\s*"
                   replacement="&gt;"/>
-          <!-- needs KeywordTokenizerFactory for query so that the search terms
-               don't get split as well -->
           <tokenizer class="solr.KeywordTokenizerFactory"/>
           <filter class="solr.LowerCaseFilterFactory"/>
           <filter class="solr.PatternReplaceFilterFactory" pattern="\s+"
@@ -114,6 +112,7 @@ schema. In this case the version should be set to the next CKAN version number.
         </analyzer>
     </fieldType>
 
+
     <!-- a field for full text.  Stores the whole field -->
     <fieldType name="textfull" class="solr.TextField" positionIncrementGap="100">
         <analyzer>
@@ -121,6 +120,7 @@ schema. In this case the version should be set to the next CKAN version number.
           <filter class="solr.LowerCaseFilterFactory"/>
         </analyzer>
     </fieldType>
+
 </types>
 
 
@@ -203,7 +203,9 @@ schema. In this case the version should be set to the next CKAN version number.
 
     <!-- Field for data_provider for attribution -->
     <field name="data_provider" type="string" indexed="true" stored="true" multiValued="true"/>
-    <field name="gcmd_keywords_full" type="gcmd_full" indexed="true" stored="true" multiValued="true"/>
+    <!-- GCMD Keywords and CF standard names -->
+    <field name="gcmd_keywords" type="gcmd_full" indexed="true" stored="true" multiValued="true"/>
+    <field name="cf_standard_names" type="string" indexed="true" stored="true" multiValued="true"/>
 
     <dynamicField name="*_date" type="date" indexed="true" stored="true" multiValued="false"/>
 
