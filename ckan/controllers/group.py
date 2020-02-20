@@ -293,7 +293,7 @@ class GroupController(base.BaseController):
                         and len(value) and not param.startswith('_'):
                     if not param.startswith('ext_'):
                         c.fields.append((param, value))
-                        q += ' %s: "%s"' % (param, value)
+                        fq += '+%s: "%s"' % (param, value)
                         if param not in c.fields_grouped:
                             c.fields_grouped[param] = [value]
                         else:
