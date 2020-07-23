@@ -821,9 +821,12 @@ def tag_list(context, data_dict):
 def user_list(context, data_dict):
     '''Return a list of the site's user accounts.
 
-    :param q: restrict the users returned to those whose names contain a string
+    :param q: filter the users returned to those whose names contain a string
       (optional)
     :type q: string
+    :param email: filter the users returned to those whose email match a
+      string (optional) (you must be a sysadmin to use this filter)
+    :type email: string
     :param order_by: which field to sort the list by (optional, default:
       ``'name'``). Can be any user field or ``edits`` (i.e. number_of_edits).
     :type order_by: string
@@ -842,6 +845,7 @@ def user_list(context, data_dict):
     _check_access('user_list', context, data_dict)
 
     q = data_dict.get('q', '')
+    email = data_dict.get('email')
     order_by = data_dict.get('order_by', 'name')
     all_fields = asbool(data_dict.get('all_fields', True))
 
@@ -869,6 +873,8 @@ def user_list(context, data_dict):
 
     if q:
         query = model.User.search(q, query, user_name=context.get('user'))
+    if email:
+        query = query.filter_by(email=email)
 
     if order_by == 'edits':
         query = query.order_by(_desc(
@@ -1866,6 +1872,8 @@ def package_search(context, data_dict):
 
         if result_fl:
             for package in query.results:
+                if isinstance(package, text_type):
+                    package = {result_fl[0]: package}
                 if package.get('extras'):
                     package.update(package['extras'] )
                     package.pop('extras')
@@ -2667,7 +2675,7 @@ def user_activity_list_html(context, data_dict):
     :rtype: string
 
     '''
-    activity_stream = user_activity_list(context, data_dict)
+    activity_stream = logic.get_action('user_activity_list')(context, data_dict)
     offset = int(data_dict.get('offset', 0))
     extra_vars = {
         'controller': 'user',
@@ -2698,7 +2706,7 @@ def package_activity_list_html(context, data_dict):
     :rtype: string
 
     '''
-    activity_stream = package_activity_list(context, data_dict)
+    activity_stream = logic.get_action('package_activity_list')(context, data_dict)
     offset = int(data_dict.get('offset', 0))
     extra_vars = {
         'controller': 'package',
@@ -2729,7 +2737,7 @@ def group_activity_list_html(context, data_dict):
     :rtype: string
 
     '''
-    activity_stream = group_activity_list(context, data_dict)
+    activity_stream = logic.get_action('group_activity_list')(context, data_dict)
     offset = int(data_dict.get('offset', 0))
     extra_vars = {
         'controller': 'group',
@@ -2753,7 +2761,7 @@ def organization_activity_list_html(context, data_dict):
     :rtype: string
 
     '''
-    activity_stream = organization_activity_list(context, data_dict)
+    activity_stream = logic.get_action('organization_activity_list')(context, data_dict)
     offset = int(data_dict.get('offset', 0))
     extra_vars = {
         'controller': 'organization',
@@ -2784,8 +2792,8 @@ def recently_changed_packages_activity_list_html(context, data_dict):
     :rtype: string
 
     '''
-    activity_stream = recently_changed_packages_activity_list(
-        context, data_dict)
+    activity_stream = logic.get_action(
+                'recently_changed_packages_activity_list')(context, data_dict)
     offset = int(data_dict.get('offset', 0))
     extra_vars = {
         'controller': 'package',
@@ -3344,7 +3352,7 @@ def dashboard_activity_list_html(context, data_dict):
     :rtype: string
 
     '''
-    activity_stream = dashboard_activity_list(context, data_dict)
+    activity_stream = logic.get_action('dashboard_activity_list')(context, data_dict)
     model = context['model']
     user_id = context['user']
     offset = data_dict.get('offset', 0)

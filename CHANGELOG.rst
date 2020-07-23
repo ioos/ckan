@@ -7,6 +7,77 @@
 Changelog
 ---------
 
+v.2.8.4 TBA
+===========
+
+General notes:
+ * Note: This version does not requires a requirements upgrade on source installations
+ * Note: This version does not requires a database upgrade
+ * Note: This version does not require a Solr schema upgrade
+ * Note: This version includes changes in the way the ``SameSite`` flag is set on the ``auth_tkt`` authorization cookie.
+   The new default setting for it is ``SameSite=Lax``, which aligns with the behaviour of all major browsers. If for some
+   reason you need a different value, you can set it via the :ref:`who.samesite` configuration option. You can find more
+   information on the ``SameSite`` attribute `here <https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies>`_.
+
+
+Fixes:
+
+* Fix for number of datasets displayed on the My organizations tab (`#3580 <https://github.com/ckan/ckan/pull/3580>`_)
+* Allow chaining of core actions (`#4509 <https://github.com/ckan/ckan/pull/4509>`_)
+* Password reset request - generally tighten it up (`#4636 <https://github.com/ckan/ckan/pull/4636>`_)
+* Fix start option in data_dict (`#4920 <https://github.com/ckan/ckan/pull/4920>`_)
+* Add missing get_action calls in activity actions (`#4967 <https://github.com/ckan/ckan/pull/4967>`_)
+* Fix datetime comparison in resource_dict_save (`#5033 <https://github.com/ckan/ckan/pull/5033>`_)
+* Fix wrong _ function reference in user blueprint (`#5046 <https://github.com/ckan/ckan/pull/5046>`_)
+* Allow vocabulary_id in /api/2/util/tag/autocomplete (`#5071 <https://github.com/ckan/ckan/pull/5071>`_)
+* Fetch less data for `get_all_entity_ids` (`#5201 <https://github.com/ckan/ckan/pull/5201>`_)
+* Show error in text view if xhr failed (`#5271 <https://github.com/ckan/ckan/pull/5271>`_)
+* Fix code injection in autocomplete module (`#5064 <https://github.com/ckan/ckan/pull/5064>`_)
+* Check for the existence of tracking summary data before attempting to load it (`#5030 <https://github.com/ckan/ckan/pull/5139>`_)
+* Disable streaming for pylons requests (`#4431 <https://github.com/ckan/ckan/pull/4657>`_)
+* Filter revisions shown according to dataset permissions
+* Fix wrong resource URL after ValidationErrors (`#5152 <https://github.com/ckan/ckan/pull/5153>`_)
+* Update JS vendor libraries
+* Samesite support in auth cookie (`#5255 <https://github.com/ckan/ckan/pull/5255>`_)
+* Handle missing resources in case we have a race condition with the DataPusher (`#3980 <https://github.com/ckan/ckan/pull/4918>`_)
+* Add the g object to toolkit
+* Use returned facets in group controller (`#2713 <https://github.com/ckan/ckan/pull/5167>`_)
+* Updated translations
+* Fix broken translation in image view placeholder (`#5099 <https://github.com/ckan/ckan/pull/5116>`_)
+
+
+v.2.8.3 2019-07-03
+==================
+
+General notes:
+ * Note: This version does not requires a requirements upgrade on source installations
+ * Note: This version does not requires a database upgrade
+ * Note: This version does not require a Solr schema upgrade
+
+Fixes:
+
+* Fix `include_total` in `datastore_search` (`#4446 <https://github.com/ckan/ckan/issues/4446>`_)
+* Fix problem with reindex-fast (`#4352 <https://github.com/ckan/ckan/issues/4352>`_)
+* Fix `ValueError` in `url_validator` (`#4629 <https://github.com/ckan/ckan/issues/4629>`_)
+* Strip local path when uploading file in IE (`#4608 <https://github.com/ckan/ckan/issues/4608>`_)
+* Increase size of h1 headings to 1.8em (`#4665 <https://github.com/ckan/ckan/issues/4665>`_)
+* Fix broken div nesting in the `user/read_base.html` (`#4672 <https://github.com/ckan/ckan/issues/4672>`_)
+* `package_search` parameter `fl` accepts list-like values (`#4464 <https://github.com/ckan/ckan/issues/4464>`_)
+* Use `chained_auth_function` with core auth functions (`#4491 <https://github.com/ckan/ckan/issues/4491>`_)
+* Allow translation of custom licenses (`#4594 <https://github.com/ckan/ckan/issues/4594>`_)
+* Fix delete button links (`#4598 <https://github.com/ckan/ckan/issues/4598>`_)
+* Fix hardcoded root paths (`#4662 <https://github.com/ckan/ckan/issues/4662>`_)
+* Fix reCaptcha (`#4732 <https://github.com/ckan/ckan/issues/4732>`_)
+* Fix incremented follower-counter (`#4767 <https://github.com/ckan/ckan/issues/4767>`_)
+* Fix breadcrumb on /datasets (`#4405 <https://github.com/ckan/ckan/issues/4405>`_)
+* Fix `root_path` when using mod_wsgi (`#4452 <https://github.com/ckan/ckan/issues/4452>`_)
+* Correctly insert root_path for urls generated with _external flag (`#4722 <https://github.com/ckan/ckan/issues/4722>`_)
+* Make reorder resources button translatable (`#4838 <https://github.com/ckan/ckan/issues/4838>`_)
+* Fix `feeds` urls generation (`#4854 <https://github.com/ckan/ckan/pull/4854>`_)
+* More robust auth functions for `resource_view_show` (`#4827 <https://github.com/ckan/ckan/issues/4827>`_)
+* Allow to customize the DataProxy URL (`#4874 <https://github.com/ckan/ckan/issues/4874>`_)
+* Allow custom CKAN callback URL for the DataPusher (`#4878 <https://github.com/ckan/ckan/issues/4878>`_)
+* Add `psycopg>=2.8` support (`#4841 <https://github.com/ckan/ckan/pull/4841>`_)
 
 v.2.8.2 2018-12-12
 ==================

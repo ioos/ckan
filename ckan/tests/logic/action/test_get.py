@@ -584,6 +584,18 @@ class TestUserList(helpers.FunctionalTestBase):
         got_user = got_users[0]
         assert got_user == user['name']
 
+    def test_user_list_filtered_by_email(self):
+
+        user_a = factories.User(email='a@example.com')
+        factories.User(email='b@example.com')
+
+        got_users = helpers.call_action('user_list', email='a@example.com',
+                                        all_fields=False)
+
+        assert len(got_users) == 1
+        got_user = got_users[0]
+        assert got_user == user_a['name']
+
 
 class TestUserShow(helpers.FunctionalTestBase):
 
@@ -857,12 +869,17 @@ class TestPackageSearch(helpers.FunctionalTestBase):
         eq(search_result['count'], 1)
 
     def test_search_fl(self):
-        factories.Dataset(title='Rivers', name='test_ri')
-        factories.Dataset(title='Lakes')
+        d1 = factories.Dataset(title='Rivers', name='test_ri')
+        d2 = factories.Dataset(title='Lakes')
 
         search_result = helpers.call_action('package_search', q='rivers', fl=['title', 'name'])
-
         eq(search_result['results'], [{'title': 'Rivers', 'name': 'test_ri'}])
+
+        search_result = helpers.call_action('package_search', q='rivers', fl='title,name')
+        eq(search_result['results'], [{'title': 'Rivers', 'name': 'test_ri'}])
+
+        search_result = helpers.call_action('package_search', q='rivers', fl=['id'])
+        eq(search_result['results'], [{'id': d1['id']}])
 
     def test_search_all(self):
         factories.Dataset(title='Rivers')
