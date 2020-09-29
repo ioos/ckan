@@ -206,6 +206,8 @@ schema. In this case the version should be set to the next CKAN version number.
     <!-- GCMD Keywords and CF standard names -->
     <field name="gcmd_keywords" type="gcmd_full" indexed="true" stored="true" multiValued="true"/>
     <field name="cf_standard_names" type="string" indexed="true" stored="true" multiValued="true"/>
+    <field name="vertical_min" type="double" indexed="true" stored="true" multiValued="false"/>
+    <field name="vertical_max" type="double" indexed="true" stored="true" multiValued="false"/>
 
     <dynamicField name="*_date" type="date" indexed="true" stored="true" multiValued="false"/>
 
