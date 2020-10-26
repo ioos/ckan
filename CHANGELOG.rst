@@ -7,8 +7,48 @@
 Changelog
 ---------
 
-v.2.8.4 TBA
-===========
+
+v.2.8.6 2020-10-21
+==================
+
+Fixes:
+* Allow IAuthenticator methods to return responses (`#5259 <https://github.com/ckan/ckan/pull/5640>`_)
+* Fix skip to content link hiding on screen readers (`#5556 <https://github.com/ckan/ckan/pull/5556>`_)
+* Fix unflattening of dataset extras (`#5602 <https://github.com/ckan/ckan/pull/5611>`_)
+* Fix minified JS files in 2.7 (`#5557 <https://github.com/ckan/ckan/pull/5561>`_)
+* Send the right URL of CKAN to datapusher (`#5281 <https://github.com/ckan/ckan/pull/5281>`_)
+* Fix fullscreen for resource webpageview (`#5552 <https://github.com/ckan/ckan/pull/5552>`_)
+* PackageSearchIndex.index_package(): catch IndexError from date parsing (`#5535 <https://github.com/ckan/ckan/pull/5535>`_)
+* Fix collapsible menu in mobile view (`#5448 <https://github.com/ckan/ckan/pull/5448>`_)
+* Refactor query string parsing module
+
+
+v.2.8.5 2020-08-05
+==================
+
+Fixes:
+
+* Add RTL support (`#5413 <https://github.com/ckan/ckan/pull/5413>`_)
+* Fix UnicodeDecodeError on abort fucntion (`#4829 <https://github.com/ckan/ckan/pull/4829>`_)
+* Improve and reorder resource_formats.json (`#5034 <https://github.com/ckan/ckan/pull/5034>`_)
+* Allow passing arguments to the RQ enqueue_call function (`#5208 <https://github.com/ckan/ckan/pull/5208>`_)
+* Fix dashboard follower filter (`#5412 <https://github.com/ckan/ckan/pull/5412>`_)
+* Update dictionary.html for bs2 version (`#5365 <https://github.com/ckan/ckan/pull/5365>`_)
+* Prevent password reset exposing account presence (`#5431 <https://github.com/ckan/ckan/pull/5431>`_)
+* Add class dropdown to 'New view' menu (`#5470 <https://github.com/ckan/ckan/pull/5470>`_)
+* Update jQuery to 3.5.0 (`#5364 <https://github.com/ckan/ckan/pull/5364>`_)
+* Fix dashboard activity filter (`#5424 <https://github.com/ckan/ckan/pull/5424>`_)
+* Prevent account presence exposure when ckan.auth.public_user_details = false (`#5432 <https://github.com/ckan/ckan/pull/5432>`_)
+* Fix resource upload filename fetching in IE (`#5438 <https://github.com/ckan/ckan/pull/5438>`_)
+* Unflatten: allow nesting >1 level (`#5444 <https://github.com/ckan/ckan/pull/5444>`_)
+* Allow lists in resource extras (`#5453 <https://github.com/ckan/ckan/pull/5453>`_)
+* Only add error to tag_errors if not empty (`#5454 <https://github.com/ckan/ckan/pull/5454>`_)
+* Fix order_by param in user_list action (`#5342 <https://github.com/ckan/ckan/pull/5342>`_)
+* Fix for Resources validation errors display (`#5335 <https://github.com/ckan/ckan/pull/5335>`_)
+
+
+v.2.8.4 2020-04-15
+==================
 
 General notes:
  * Note: This version does not requires a requirements upgrade on source installations
